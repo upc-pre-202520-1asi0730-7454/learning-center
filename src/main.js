@@ -22,7 +22,7 @@ import router from "./router.js";
 
 // noinspection JSCheckFunctionSignatures
 createApp(App)
-    .use(i18n)
+    .use(i18n) 
     .use(PrimeVue, { theme: { preset: Material}, ripple: true })
     .use(ConfirmationService)
     .use(DialogService)
