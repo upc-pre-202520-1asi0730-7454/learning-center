@@ -1,0 +1,34 @@
+{
+  "categories": [
+    { "id": 1, "name": "JavaScript" },
+    { "id": 2, "name": "Vue" },
+    { "id": 3, "name": "CSharp" },
+    { "id": 4, "name": "ASP.NET" }
+  ],
+  "tutorials": [
+    {
+      "id": 1,
+      "title": "Learn JavaScript",
+      "summary": "An introduction to JavaScript programming language.",
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "title": "Mastering Vue.js",
+      "summary": "A comprehensive guide to building applications with Vue.js.",
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "title": "C# for Beginners",
+      "summary": "Getting started with C# programming language.",
+      "categoryId": 3
+    },
+    {
+      "id": 4,
+      "title": "Building Web Apps with ASP.NET",
+      "summary": "Learn how to create web applications using ASP.NET framework.",
+      "categoryId": 4
+    }
+  ]
+}
