@@ -71,4 +71,60 @@ const usePublishingStore = defineStore('publishing', () => {
             errors.value.push(error);
         });
     }
+
+    function getTutorialById(id) {
+        let idNum = parseInt(id);
+        return tutorials.value.find(tutorial => tutorial["id"] === idNum);
+    }
+    function addTutorial(tutorial) {
+        publishingApi.createTutorial(tutorial).then(response => {
+            const resource = response.data;
+            const newTutorial = TutorialAssembler.toEntityFromResource(resource);
+            tutorials.value.push(newTutorial);
+        }).catch(error => {
+            errors.value.push(error);
+        });
+    }
+
+    function updateTutorial(tutorial) {
+        publishingApi.updateTutorial(tutorial).then(response => {
+            const resource = response.data;
+            const updatedTutorial = TutorialAssembler.toEntityFromResource(resource);
+            const index = tutorials.value.findIndex(tut => tut['id'] === updatedTutorial.id);
+            if (index !== -1) tutorials.value[index] = updatedTutorial;
+        }).catch(error => {
+            errors.value.push(error);
+        });
+    }
+
+    function deleteTutorial(id) {
+        publishingApi.deleteTutorial(id).then(() => {
+            const index = tutorials.value.findIndex(tut => tut['id'] === id);
+            if (index !== -1) tutorials.value.splice(index, 1);
+        }).catch(error => {
+            errors.value.push(error);
+        });
+    }
+
+    return {
+        categories,
+        tutorials,
+        errors,
+        categoriesLoaded,
+        tutorialsLoaded,
+        categoriesCount,
+        tutorialsCount,
+        fetchCategories,
+        fetchTutorials,
+        getCategoryById,
+        addCategory,
+        updateCategory,
+        deleteCategory,
+        getTutorialById,
+        addTutorial,
+        updateTutorial,
+        deleteTutorial
+    }
 });
+
+export default usePublishingStore;
