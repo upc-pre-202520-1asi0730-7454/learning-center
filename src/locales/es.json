@@ -1,7 +1,9 @@
 {
   "option": {
     "home": "Inicio",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "categories": "Categorías",
+    "tutorials": "Tutoriales"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -20,5 +22,43 @@
     "title": "Página No Encontrada",
     "content": "La ruta {unavailable-route} que está buscando no existe.",
     "go-home": "Go Home"
+  },
+  "categories": {
+    "title": "Categorías",
+    "id": "ID",
+    "name": "Nombre",
+    "actions": "Acciones",
+    "new": "Nueva Categoría",
+    "confirm-delete": "¿Estás seguro de que quieres eliminar {name}?",
+    "delete-header": "Confirmar Eliminación"
+  },
+  "category": {
+    "new-title": "Crear Nueva Categoría",
+    "edit-title": "Editar Categoría",
+    "name": "Nombre",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "tutorials": {
+    "title": "Tutoriales",
+    "id": "ID",
+    "summary": "Resumen",
+    "category-id": "ID de Categoría",
+    "actions": "Acciones",
+    "new": "Nuevo Tutorial",
+    "confirm-delete": "¿Estás seguro de que quieres eliminar {title}?",
+    "delete-header": "Confirmar Eliminación"
+  },
+  "tutorial": {
+    "new-title": "Crear Nuevo Tutorial",
+    "edit-title": "Editar Tutorial",
+    "title": "Título",
+    "summary": "Resumen",
+    "category": "Categoría",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "errors": {
+    "occurred": "Ocurrieron errores"
   }
 }
