@@ -9,8 +9,10 @@ const { t } = useI18n();
 const drawer = ref(false);
 const toggleDrawer = () => { drawer.value = !drawer.value;};
 const items = [
-  { label: 'option.home', to: '/home'},
-  { label: 'option.about', to: '/about'}
+  { label: 'option.home',       to: '/home'},
+  { label: 'option.about',      to: '/about'},
+  { label: 'option.categories', to: '/publishing/categories'},
+  { label: 'option.tutorials',  to: '/publishing/tutorials'}
 ];
 </script>
 
