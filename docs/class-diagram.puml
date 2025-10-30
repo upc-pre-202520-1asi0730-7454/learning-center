@@ -1,0 +1,204 @@
+@startuml
+package "Publishing Bounded Context" as publishing {
+    package "Domain" as publishing_domain {
+        class Category <<resource>> {
+            - id: Number|null
+            - name: string
+            + constructor(id, name)
+        }
+
+        class Tutorial <<resource>> {
+            - id: Number|null
+            - title: string
+            - summary: string
+            - categoryId: Number|null
+            - category: Category
+            + constructor(id, title, summary, categoryId, category)
+        }
+
+        Category ||--o Tutorial : has
+    }
+
+    package "Infrastructure" as publishing_infrastructure {
+        class CategoryAssembler <<assembler>> {
+            + {static} toEntityFromResource(resource): Category
+            + {static} toEntitiesFromResponse(response): Category[]
+        }
+
+        class TutorialAssembler <<assembler>> {
+            + {static} toEntityFromResource(resource): Tutorial
+            + {static} toEntitiesFromResponse(response): Tutorial[]
+        }
+
+        class PublishingApi {
+            - categoriesEndpoint: BaseEndpoint
+            - tutorialsEndpoint: BaseEndpoint
+            + constructor()
+            + getCategories(): Promise
+            + getCategoryById(id): Promise
+            + createCategory(resource): Promise
+            + updateCategory(id, resource): Promise
+            + deleteCategory(id): Promise
+            + getTutorials(): Promise
+            + getTutorialById(id): Promise
+            + createTutorial(resource): Promise
+            + updateTutorial(id, resource): Promise
+            + deleteTutorial(id): Promise
+        }
+
+        PublishingApi ..|> BaseApi
+        PublishingApi --> BaseEndpoint
+    }
+
+    package "Application" as publishing_application {
+        class PublishingStore <<store>> {
+            - categories: Category[]
+            - tutorials: Tutorial[]
+            - errors: any[]
+            - categoriesLoaded: boolean
+            - tutorialsLoaded: boolean
+            + categoriesCount: computed
+            + tutorialsCount: computed
+            + fetchCategories()
+            + fetchTutorials()
+            + addCategory(category)
+            + updateCategory(category)
+            + deleteCategory(id)
+            + addTutorial(tutorial)
+            + updateTutorial(tutorial)
+            + deleteTutorial(id)
+        }
+
+        PublishingStore --> PublishingApi
+        PublishingStore --> CategoryAssembler
+        PublishingStore --> TutorialAssembler
+    }
+
+    package "Presentation" as publishing_presentation {
+        class CategoryList <<component>> {
+            - t: function
+            - router: Router
+            - confirm: Confirm
+            - store: PublishingStore
+            - categories: Category[]
+            - categoriesLoaded: boolean
+            - errors: any[]
+            - fetchCategories: function
+            - deleteCategory: function
+            + navigateToNew()
+            + navigateToEdit(id)
+            + confirmDelete(category)
+        }
+
+        class CategoryForm <<component>> {
+            - t: function
+            - route: Route
+            - router: Router
+            - store: PublishingStore
+            - errors: any[]
+            - addCategory: function
+            - updateCategory: function
+            - form: object
+            - isEdit: boolean
+            + getCategoryById(id): Category
+            + saveCategory()
+            + navigateBack()
+        }
+
+        class TutorialList <<component>> {
+            - t: function
+            - router: Router
+            - confirm: Confirm
+            - store: PublishingStore
+            - tutorials: Tutorial[]
+            - tutorialsLoaded: boolean
+            - errors: any[]
+            - fetchTutorials: function
+            - deleteTutorial: function
+            + navigateToNew()
+            + navigateToEdit(id)
+            + confirmDelete(tutorial)
+        }
+
+        class TutorialForm <<component>> {
+            - t: function
+            - route: Route
+            - router: Router
+            - store: PublishingStore
+            - errors: any[]
+            - addTutorial: function
+            - updateTutorial: function
+            - form: object
+            - isEdit: boolean
+            + getTutorialById(id): Tutorial
+            + saveTutorial()
+            + navigateBack()
+        }
+
+        CategoryList --> PublishingStore
+        CategoryForm --> PublishingStore
+        TutorialList --> PublishingStore
+        TutorialForm --> PublishingStore
+    }
+}
+
+package "Shared Bounded Context" as shared {
+    package "Infrastructure" as shared_infrastructure {
+        class BaseApi {
+            - http: AxiosInstance
+            + constructor()
+            + get http(): AxiosInstance
+        }
+
+        class BaseEndpoint {
+            - http: AxiosInstance
+            - endpointPath: string
+            + constructor(baseApi, endpointPath)
+            + getAll(): Promise
+            + getById(id): Promise
+            + create(resource): Promise
+            + update(id, resource): Promise
+            + delete(id): Promise
+        }
+
+        BaseEndpoint --> BaseApi
+    }
+
+    package "Presentation" as shared_presentation {
+        package "Components" as shared_components {
+            class Layout <<component>> {
+                - t: function
+                - drawer: boolean
+                - items: array
+                + toggleDrawer()
+            }
+
+            class LanguageSwitcher <<component>> {
+                - t: function
+                - locale: string
+                - availableLocales: string[]
+            }
+
+            class FooterContent <<component>> {
+                - t: function
+            }
+        }
+
+        package "Views" as shared_views {
+            class Home <<component>> {
+                - t: function
+            }
+
+            class About <<component>> {
+                - t: function
+            }
+
+            class PageNotFound <<component>> {
+                - router: Router
+                - unavailableRoute: string
+                - t: function
+            }
+        }
+    }
+}
+@enduml
