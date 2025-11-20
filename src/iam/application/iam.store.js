@@ -14,27 +14,25 @@ const iamApi = new IamApi();
  * @returns {Object} The store object with state and actions.
  */
 const useIamStore = defineStore('iam', () => {
-    /** @type {import('vue').Ref<Array<User>>} Array of user entities. */
+    /** @type {Array} */
     const users = ref([]);
-    /** @type {import('vue').Ref<Array<Error>>} Array of error messages. */
+    /** @type {Array} */
     const errors = ref([]);
-    /** @type {import('vue').Ref<boolean>} Flag indicating if users have been loaded. */
+    /** @type {boolean} */
     const usersLoaded = ref(false);
-    /** @type {import('vue').Ref<boolean>} Flag indicating if a user is signed in. */
+    /** @type {boolean} */
     const isSignedIn = ref(false);
-    /** @type {import('vue').Ref<string|null>} The currently signed-in user entity. */
+    /** @type {string|null} */
     const currentUsername = ref(null);
-    /** @type {import('vue').Ref<number|null>} The currently signed-in user entity. */
+    /** @type {number|null} */
     const currentUserId = ref(0);
-    /** @type {import('vue').ComputedRef<string|null>} The current authentication token. */
+    /** @type {string|null} */
     const currentToken = computed(() => isSignedIn.value ? localStorage.getItem('token') : null);
 
     /**
      * Signs in a user with the provided credentials.
      * @param {SignInCommand} signInCommand - The sign-in command object.
      * @param router - The Vue router instance for navigation.
-     * @param {string} signInCommand.username - The username.
-     * @param {string} signInCommand.password - The password.
      * @throws {Error} If the sign-in fails.
      */
     function signIn(signInCommand, router) {
@@ -73,9 +71,6 @@ const useIamStore = defineStore('iam', () => {
      * Signs up a new user with the provided details.
      * @param {SignUpCommand} signUpCommand - The sign-up command object.
      * @param router - The Vue router instance for navigation.
-     * @param {string} signUpCommand.username - The username.
-     * @param {string} signUpCommand.password - The password.
-     * @param {string} signUpCommand.email - The email.
      * @throws {Error} If the sign-up fails.
      */
     function signUp(signUpCommand, router) {

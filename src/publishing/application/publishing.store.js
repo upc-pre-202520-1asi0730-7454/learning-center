@@ -12,19 +12,19 @@ const publishingApi = new PublishingApi();
  * @returns {Object} The store object with state and actions.
  */
 const usePublishingStore = defineStore('publishing', () => {
-    /** @type {import('vue').Ref<Array<Category>>} Array of category entities. */
+    /** @type {Array} */
     const categories = ref([]);
-    /** @type {import('vue').Ref<Array<Tutorial>>} Array of tutorial entities. */
+    /** @type {Array} */
     const tutorials = ref([]);
-    /** @type {import('vue').Ref<Array<Error>>} Array of error messages. */
+    /** @type {Array} */
     const errors = ref([]);
-    /** @type {import('vue').Ref<boolean>} Flag indicating if categories have been loaded. */
+    /** @type {boolean} */
     const categoriesLoaded = ref(false);
-    /** @type {import('vue').Ref<boolean>} Flag indicating if tutorials have been loaded. */
+    /** @type {boolean} */
     const tutorialsLoaded = ref(false);
-    /** @type {import('vue').ComputedRef<number>} Computed count of loaded categories. */
+    /** @type {number} */
     const categoriesCount = computed(() => categoriesLoaded.value ? categories.value.length : 0);
-    /** @type {import('vue').ComputedRef<number>} Computed count of loaded tutorials. */
+    /** @type {number} */
     const tutorialsCount = computed(() => tutorialsLoaded.value ? tutorials.value.length : 0);
 
     /**

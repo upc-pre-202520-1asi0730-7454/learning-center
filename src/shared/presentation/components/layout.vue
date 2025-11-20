@@ -8,7 +8,12 @@ import AuthenticationSection from "../../../iam/presentation/components/authenti
 
 const { t } = useI18n();
 const drawer = ref(false);
+
+/**
+ * Toggles the visibility of the navigation drawer.
+ */
 const toggleDrawer = () => { drawer.value = !drawer.value;};
+
 const items = [
   { label: 'option.home',       to: '/home'},
   { label: 'option.about',      to: '/about'},

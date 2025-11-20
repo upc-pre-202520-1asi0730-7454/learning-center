@@ -8,7 +8,6 @@ const {signOut} = store;
 
 /**
  * Navigate to the sign-in page.
- * @function performSignIn
  */
 function performSignIn() {
   router.push({name: 'iam-sign-in'});
@@ -16,7 +15,6 @@ function performSignIn() {
 
 /**
  * Navigate to the sign-up page.
- * @function performSignUp
  */
 function performSignUp() {
   router.push({name: 'iam-sign-up'});
@@ -24,7 +22,6 @@ function performSignUp() {
 
 /**
  * Sign out the current user and navigate to the appropriate page.
- * @function performSignOut
  */
 function performSignOut() {
   signOut(router);
