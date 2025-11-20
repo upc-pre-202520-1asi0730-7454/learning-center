@@ -7,9 +7,6 @@ const router = useRouter();
 const store = useIamStore();
 const {signOut} = store;
 
-let isSignedIn = computed(() => !!store.isSignedIn);
-let currentUsername = computed(() => store.currentUsername);
-
 /**
  * Navigate to the sign-in page.
  * @function performSignIn
@@ -37,8 +34,8 @@ function performSignOut() {
 
 <template>
   <div>
-    <div v-if="isSignedIn">
-      <span class="p-button-text bg-primary"> Welcome, {{ currentUsername }}</span>
+    <div v-if="store.isSignedIn">
+      <span class="p-button-text bg-primary"> Welcome, {{ store.currentUsername }}</span>
       <pv-button class="bg-primary" text @click="performSignOut">Sign Out</pv-button>
     </div>
     <div v-else>
