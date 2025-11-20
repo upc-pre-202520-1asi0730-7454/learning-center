@@ -32,6 +32,7 @@ const useIamStore = defineStore('iam', () => {
     /**
      * Signs in a user with the provided credentials.
      * @param {SignInCommand} signInCommand - The sign-in command object.
+     * @param router - The Vue router instance for navigation.
      * @param {string} signInCommand.username - The username.
      * @param {string} signInCommand.password - The password.
      * @throws {Error} If the sign-in fails.
@@ -71,6 +72,7 @@ const useIamStore = defineStore('iam', () => {
     /**
      * Signs up a new user with the provided details.
      * @param {SignUpCommand} signUpCommand - The sign-up command object.
+     * @param router - The Vue router instance for navigation.
      * @param {string} signUpCommand.username - The username.
      * @param {string} signUpCommand.password - The password.
      * @param {string} signUpCommand.email - The email.
