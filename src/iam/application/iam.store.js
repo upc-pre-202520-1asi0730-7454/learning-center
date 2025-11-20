@@ -14,19 +14,19 @@ const iamApi = new IamApi();
  * @returns {Object} The store object with state and actions.
  */
 const useIamStore = defineStore('iam', () => {
-    /** @type {Array} */
+    /** @type {ref} */
     const users = ref([]);
-    /** @type {Array} */
+    /** @type {ref} */
     const errors = ref([]);
-    /** @type {boolean} */
+    /** @type {ref} */
     const usersLoaded = ref(false);
-    /** @type {boolean} */
+    /** @type {ref} */
     const isSignedIn = ref(false);
     /** @type {string|null} */
     const currentUsername = ref(null);
     /** @type {number|null} */
     const currentUserId = ref(0);
-    /** @type {string|null} */
+    /** @type {computed} */
     const currentToken = computed(() => isSignedIn.value ? localStorage.getItem('token') : null);
 
     /**
