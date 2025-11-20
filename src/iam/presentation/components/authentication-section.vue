@@ -35,11 +35,11 @@ function performSignOut() {
   <div>
     <div v-if="store.isSignedIn">
       <span class="p-button-text bg-primary"> Welcome, {{ store.currentUsername }}</span>
-      <pv-button class="bg-primary" text @click="performSignOut">Sign Out</pv-button>
+      <pv-button class="bg-primary" text @click="performSignOut">Sign-Out</pv-button>
     </div>
     <div v-else>
-      <pv-button class="bg-primary" text @click="performSignIn">Sign In</pv-button>
-      <pv-button class="bg-primary" text @click="performSignUp">Sign Up</pv-button>
+      <pv-button class="bg-primary" text @click="performSignIn">Sign-In</pv-button>
+      <pv-button class="bg-primary" text @click="performSignUp">Sign-Up</pv-button>
     </div>
   </div>
 </template>
