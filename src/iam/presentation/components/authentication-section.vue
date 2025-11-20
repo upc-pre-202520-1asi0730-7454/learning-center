@@ -1,7 +1,6 @@
 <script setup>
 import useIamStore from "../../application/iam.store.js";
 import {useRouter} from "vue-router";
-import {computed} from "vue";
 
 const router = useRouter();
 const store = useIamStore();
