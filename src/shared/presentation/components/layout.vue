@@ -4,6 +4,7 @@ import {ref} from "vue";
 import {Button as PvButton} from "primevue";
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
+import AuthenticationSection from "../../../iam/presentation/components/authentication-section.vue";
 
 const { t } = useI18n();
 const drawer = ref(false);
@@ -31,6 +32,7 @@ const items = [
             <router-link :to="item.to" :class="slotProps['class']">{{ t(item.label)}}</router-link>
           </pv-button>
         </div>
+        <authentication-section/>
         <language-switcher/>
       </template>
     </pv-toolbar>
