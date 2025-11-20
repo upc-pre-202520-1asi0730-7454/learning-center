@@ -16,15 +16,26 @@ onMounted(() => {
   console.log(tutorials);
 });
 
+/**
+ * Navigates to the new tutorial form.
+ */
 const navigateToNew = () => {
   router.push({ name: 'publishing-tutorial-new' });
 };
 
+/**
+ * Navigates to the edit tutorial form for the given ID.
+ * @param {number} id - The tutorial ID.
+ */
 const navigateToEdit = (id) => {
   console.log(id);
   router.push({ name: 'publishing-tutorial-edit', params: { id } });
 };
 
+/**
+ * Confirms deletion of a tutorial and proceeds if accepted.
+ * @param {Tutorial} tutorial - The tutorial to delete.
+ */
 const confirmDelete = (tutorial) => {
   confirm.require({
     message: t('tutorials.confirm-delete', { title: tutorial.title }),

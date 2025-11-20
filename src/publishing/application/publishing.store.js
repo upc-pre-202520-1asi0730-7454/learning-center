@@ -6,15 +6,31 @@ import {TutorialAssembler} from "../infrastructure/tutorial.assembler.js";
 
 const publishingApi = new PublishingApi();
 
+/**
+ * Pinia store for managing Publishing bounded context state.
+ * Handles categories and tutorials data fetching, creation, update, and deletion.
+ * @returns {Object} The store object with state and actions.
+ */
 const usePublishingStore = defineStore('publishing', () => {
+    /** @type {import('vue').Ref<Array<Category>>} Array of category entities. */
     const categories = ref([]);
+    /** @type {import('vue').Ref<Array<Tutorial>>} Array of tutorial entities. */
     const tutorials = ref([]);
+    /** @type {import('vue').Ref<Array<Error>>} Array of error messages. */
     const errors = ref([]);
+    /** @type {import('vue').Ref<boolean>} Flag indicating if categories have been loaded. */
     const categoriesLoaded = ref(false);
+    /** @type {import('vue').Ref<boolean>} Flag indicating if tutorials have been loaded. */
     const tutorialsLoaded = ref(false);
-    const categoriesCount = computed(() => categoriesLoaded ? categories.value.length : 0);
-    const tutorialsCount = computed(() => tutorialsLoaded ? tutorials.value.length : 0);
+    /** @type {import('vue').ComputedRef<number>} Computed count of loaded categories. */
+    const categoriesCount = computed(() => categoriesLoaded.value ? categories.value.length : 0);
+    /** @type {import('vue').ComputedRef<number>} Computed count of loaded tutorials. */
+    const tutorialsCount = computed(() => tutorialsLoaded.value ? tutorials.value.length : 0);
 
+    /**
+     * Fetches all categories from the API.
+     * @returns {Promise} A promise that resolves when categories are fetched.
+     */
     function fetchCategories() {
         return publishingApi.getCategories().then(response => {
             categories.value = CategoryAssembler.toEntitiesFromResponse(response);
@@ -26,6 +42,10 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Fetches all tutorials from the API.
+     * @returns {Promise} A promise that resolves when tutorials are fetched.
+     */
     function fetchTutorials() {
         return publishingApi.getTutorials().then(response => {
             tutorials.value = TutorialAssembler.toEntitiesFromResponse(response);
@@ -37,11 +57,20 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Gets a category by its ID.
+     * @param {number} id - The category ID.
+     * @returns {Category|null} The category entity or null if not found.
+     */
     function getCategoryById(id) {
         let idNum = parseInt(id);
         return categories.value.find(category => category["id"] === idNum);
     }
 
+    /**
+     * Adds a new category.
+     * @param {Category} category - The category to add.
+     */
     function addCategory(category) {
         publishingApi.createCategory(category).then(response => {
             const resource = response.data;
@@ -52,6 +81,10 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Updates an existing category.
+     * @param {Category} category - The category to update.
+     */
     function updateCategory(category) {
         publishingApi.updateCategory(category).then(response => {
             const resource = response.data;
@@ -63,6 +96,10 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Deletes a category by ID.
+     * @param {number} id - The category ID to delete.
+     */
     function deleteCategory(id) {
         publishingApi.deleteCategory(id).then(() => {
             const index = categories.value.findIndex(cat => cat['id'] === id);
@@ -72,10 +109,20 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Gets a tutorial by its ID.
+     * @param {number} id - The tutorial ID.
+     * @returns {Tutorial|null} The tutorial entity or null if not found.
+     */
     function getTutorialById(id) {
         let idNum = parseInt(id);
         return tutorials.value.find(tutorial => tutorial["id"] === idNum);
     }
+
+    /**
+     * Adds a new tutorial.
+     * @param {Tutorial} tutorial - The tutorial to add.
+     */
     function addTutorial(tutorial) {
         publishingApi.createTutorial(tutorial).then(response => {
             const resource = response.data;
@@ -86,6 +133,10 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Updates an existing tutorial.
+     * @param {Tutorial} tutorial - The tutorial to update.
+     */
     function updateTutorial(tutorial) {
         publishingApi.updateTutorial(tutorial).then(response => {
             const resource = response.data;
@@ -97,6 +148,10 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
+    /**
+     * Deletes a tutorial by ID.
+     * @param {number} id - The tutorial ID to delete.
+     */
     function deleteTutorial(id) {
         publishingApi.deleteTutorial(id).then(() => {
             const index = tutorials.value.findIndex(tut => tut['id'] === id);
@@ -124,7 +179,7 @@ const usePublishingStore = defineStore('publishing', () => {
         addTutorial,
         updateTutorial,
         deleteTutorial
-    }
+    };
 });
 
 export default usePublishingStore;

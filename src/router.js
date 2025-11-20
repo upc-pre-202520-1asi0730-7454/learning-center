@@ -16,6 +16,10 @@ const routes = [
     { path: '/:pathMatch(.*)*', name: 'not-found',      component: pageNotFound, meta: { title: 'Page not found' } }
 ];
 
+/**
+ * Vue Router instance for the application.
+ * Configures routes for IAM, Publishing, and Shared bounded contexts.
+ */
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: routes

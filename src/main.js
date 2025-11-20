@@ -20,8 +20,10 @@ import {
 import router from "./router.js";
 import pinia from "./pinia.js";
 
-
-// noinspection JSCheckFunctionSignatures
+/**
+ * Main application entry point.
+ * Sets up the Vue application with plugins, components, and mounts it to the DOM.
+ */
 createApp(App)
     .use(i18n) 
     .use(PrimeVue, { theme: { preset: Material}, ripple: true })

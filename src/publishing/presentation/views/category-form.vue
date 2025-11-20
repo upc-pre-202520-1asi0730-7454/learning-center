@@ -23,10 +23,18 @@ onMounted(() => {
   }
 });
 
+/**
+ * Retrieves a category by its ID from the store.
+ * @param {number} id - The category ID.
+ * @returns {Category|null} The category or null if not found.
+ */
 function getCategoryById(id) {
   return store.getCategoryById(id);
 }
 
+/**
+ * Saves the category by either adding or updating it.
+ */
 const saveCategory = () => {
   const category = new Category({
     id: isEdit.value ? route.params.id : null,
@@ -36,6 +44,9 @@ const saveCategory = () => {
   navigateBack();
 };
 
+/**
+ * Navigates back to the categories list.
+ */
 const navigateBack = () => {
   router.push({name: 'publishing-categories'});
 };
